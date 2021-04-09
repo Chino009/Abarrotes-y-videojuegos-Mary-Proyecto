@@ -161,7 +161,7 @@ namespace SimiSoft
 
             return !ban;
         }
-
+        string k;
         private void txtPrecio_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (txtPrecio.Text.Contains(","))
@@ -184,14 +184,36 @@ namespace SimiSoft
                 }
                 else
                 {
-                    if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != ',')
+                    k = Convert.ToString(txtPrecio.Text.Length);
+                    int Valor = Convert.ToInt32(k);
+                    if (Valor == 4)
                     {
-                        e.Handled = true;
+                        if (!char.IsControl(e.KeyChar) && e.KeyChar != ',')
+                        {
+                            e.Handled = true;
+                        }
+                        else
+                        {
+                            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+                            {
+                                e.Handled = false;
+                            }
+                        }
                     }
+                    else
+                    {
+
+                        if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != ',')
+                        {
+                            e.Handled = true;
+                        }
+                    }
+
                 }
             }
         }
 
+        
         private void txtStock_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (char.IsDigit(e.KeyChar))
@@ -206,6 +228,11 @@ namespace SimiSoft
             {
                 e.Handled = true;
             }
+        }
+
+        private void txtPrecio_EditValueChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
